@@ -58,6 +58,10 @@ module.exports = {
       size: 9
 		},
 
+    customRoleName: { // for staff
+      type: 'string'
+    },
+
 		developer: {
 			type: 'string',
 			defaultsTo: 'NONE',
