@@ -137,22 +137,27 @@ module.exports = {
 			//delete user.id;
       // create md5 email
       user.md5Email = crypto.createHash('md5').update(user.email).digest('hex')
-      switch (user.role) {
-        case 'FOUNDER':
-          user.roleName = 'Fondateur'
-          break;
-        case 'ADMIN':
-          user.roleName = 'Administrateur'
-          break;
-        case 'DEVELOPER':
-          user.roleName = 'Développeur'
-          break;
-        case 'MOD':
-          user.roleName = 'Modérateur'
-          break;
-        default:
-          user.roleName = 'Utilisateur'
-          break;
+      if (!user.customRoleName) {
+        switch (user.role) {
+          case 'FOUNDER':
+            user.roleName = 'Fondateur'
+            break;
+          case 'ADMIN':
+            user.roleName = 'Administrateur'
+            break;
+          case 'DEVELOPER':
+            user.roleName = 'Développeur'
+            break;
+          case 'MOD':
+            user.roleName = 'Modérateur'
+            break;
+          default:
+            user.roleName = 'Utilisateur'
+            break;
+        }
+      }
+      else {
+        user.roleName = user.customRoleName
       }
       delete user.email;
 			return user;
@@ -161,22 +166,27 @@ module.exports = {
   },
 
   getRoleName: function (user) {
-    switch (user.role) {
-      case 'FOUNDER':
-        return 'Fondateur'
-        break;
-      case 'ADMIN':
-        return 'Administrateur'
-        break;
-      case 'DEVELOPER':
-        return 'Développeur'
-        break;
-      case 'MOD':
-        return 'Modérateur'
-        break;
-      default:
-        return 'Utilisateur'
-        break;
+    if (!user.customRoleName) {
+      switch (user.role) {
+        case 'FOUNDER':
+          return 'Fondateur'
+          break;
+        case 'ADMIN':
+          return 'Administrateur'
+          break;
+        case 'DEVELOPER':
+          return 'Développeur'
+          break;
+        case 'MOD':
+          return 'Modérateur'
+          break;
+        default:
+          return 'Utilisateur'
+          break;
+      }
+    }
+    else {
+      return user.customRoleName
     }
   },
 
