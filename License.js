@@ -29,9 +29,9 @@ module.exports = {
 			type: 'string',
 			unique: true,
       defaultsTo: function () {
-				return uuid.v4().substr(4, 24);
+				return 'api2-' + uuid.v4().substr(4, 24);
 			},
-      size: 19
+      size: 24
 		},
 
 		state: {
