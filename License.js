@@ -29,7 +29,7 @@ module.exports = {
 			type: 'string',
 			unique: true,
       defaultsTo: function () {
-				return 'api2-' + uuid.v4().substr(4, 24);
+				return uuid.v4();
 			},
       size: 24
 		},
@@ -49,9 +49,21 @@ module.exports = {
 			alphanumeric: true
 		},
 
+    expire_at: {
+			type: 'datetime',
+      defaultsTo: function () {
+        var d = new Date();
+        return d.setMonth(d.getMonth() + 1);
+      }
+		},
+
 		suspended: {
 			type: 'text'
 		},
+
+    hosting: {
+      model: 'Hosting',
+    },
 
     purchase: {
       model: 'Purchase'
@@ -59,21 +71,22 @@ module.exports = {
 
   },
 
-  generate: function(userId, host, next) {
+  generate: function(userId, host, hosting, next) {
     // Save license
     License.create({
       user: userId,
       host: host
     }).exec(function (err, license) {
-
-      if (err) {
+      if (err && sails)
         sails.log.error(err)
-        return false
-      }
-
-      // Return license id
-      return next(err, license.id)
-
+      
+      // Send command to server for generate hosting if asked to
+      if (hosting)
+        HostingService.create(license, function (err) {
+          return next(err, license.id)
+        })
+      else
+        return next(err, license.id)
     })
   }
 

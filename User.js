@@ -5,204 +5,174 @@
  * @docs        :: http://sailsjs.org/documentation/concepts/models-and-orm/models
  */
 
-var crypto		= require('crypto');
-var salt			= 'DR2G0FgaC9mYhGUubWwqyJfIxfs2vn93b0guVoii';
+var crypto = require('crypto');
+var salt = 'DR2G0FgaC9mYhGUubWwqyJfIxfs2vn93b0guVoii';
 
 module.exports = {
 
   attributes: {
 
-		id : {
-			type: 'integer',
-			unique: true,
-    	autoIncrement: true,
-    	primaryKey: true,
-		},
+    id: {
+      type: 'integer',
+      unique: true,
+      autoIncrement: true,
+      primaryKey: true,
+    },
 
-		username: {
-			type: 'string',
-			required: true,
-			unique: true,
+    username: {
+      type: 'string',
+      required: true,
+      unique: true,
       min: 4,
       max: 25,
       size: 25
-		},
+    },
 
-		email: {
-			type: 'string',
-			required: true,
-			unique: true
-		},
+    email: {
+      type: 'string',
+      required: true,
+      unique: true
+    },
 
     paypalDeveloperEmail: { // For paypals payements (developers)
-			type: 'string',
-			required: false,
-			unique: true
-		},
+      type: 'string',
+      required: false,
+      unique: true
+    },
 
     pushbulletEmail: { // For support notification (admin)
-			type: 'string',
-			required: false,
-			unique: true
-		},
+      type: 'string',
+      required: false,
+      unique: true
+    },
 
-		password: {
-			type: 'string',
-			required: true
-		},
+    password: {
+      type: 'string',
+      required: true
+    },
 
-		role: {
-			type: 'string',
-			defaultsTo: 'USER',
-			in: ['USER', 'DEVELOPER', 'MOD', 'ADMIN', 'FOUNDER'],
+    role: {
+      type: 'string',
+      defaultsTo: 'USER',
+      in: ['USER', 'DEVELOPER', 'MOD', 'ADMIN', 'FOUNDER'],
       size: 9
-		},
+    },
 
     customRoleName: { // for staff
       type: 'string'
     },
 
-		developer: {
-			type: 'string',
-			defaultsTo: 'NONE',
-			in: ['NONE', 'CANDIDATE', 'CONFIRMED'],
+    developer: {
+      type: 'string',
+      defaultsTo: 'NONE',
+      in: ['NONE', 'CANDIDATE', 'CONFIRMED'],
       size: 9
-		},
+    },
 
     developerCandidacy: {
-			type: 'text'
-		},
+      type: 'text'
+    },
 
-		ip: {
-			type: 'string',
-			ip: true
-		},
+    ip: {
+      type: 'string',
+      ip: true
+    },
 
-		lang: {
-			type: 'string',
-			defaultsTo: 'fr-fr',
+    lang: {
+      type: 'string',
+      defaultsTo: 'fr-fr',
       size: 5
-		},
+    },
 
     twoFactorAuthKey: {
       type: 'string',
       size: 100
     },
 
-		tokens: {
-			collection: 'Token',
-			via: 'user'
-		},
+    tokens: {
+      collection: 'Token',
+      via: 'user'
+    },
 
-		hostings: {
-			collection: 'Hosting',
-			via: 'user'
-		},
+    hostings: {
+      collection: 'Hosting',
+      via: 'user'
+    },
 
-		licenses: {
-			collection: 'License',
-			via: 'user'
-		},
+    licenses: {
+      collection: 'License',
+      via: 'user'
+    },
 
-		plugins: {
-			collection: 'Plugin',
-			via: 'author'
-		},
+    plugins: {
+      collection: 'Plugin',
+      via: 'author'
+    },
 
-		themes: {
-			collection: 'Theme',
-			via: 'author'
-		},
+    themes: {
+      collection: 'Theme',
+      via: 'author'
+    },
 
     purchases: {
-			collection: 'Purchase',
-			via: 'user'
-		},
+      collection: 'Purchase',
+      via: 'user'
+    },
 
     paypalPayments: {
-			collection: 'PayPalHistory',
-			via: 'user'
-		},
+      collection: 'PayPalHistory',
+      via: 'user'
+    },
 
-		dedipassPayments: {
-			collection: 'DedipassHistory',
-			via: 'user'
-		},
+    dedipassPayments: {
+      collection: 'DedipassHistory',
+      via: 'user'
+    },
 
-		toJSON: function() {
-			var user = this.toObject();
-			delete user.password;
-			delete user.tokens;
-			delete user.ip;
-			//delete user.id;
+    toJSON: function () {
+      var user = this.toObject();
+      delete user.password;
+      delete user.tokens;
+      delete user.ip;
       // create md5 email
       user.md5Email = crypto.createHash('md5').update(user.email).digest('hex')
-      if (!user.customRoleName) {
-        switch (user.role) {
-          case 'FOUNDER':
-            user.roleName = 'Fondateur'
-            break;
-          case 'ADMIN':
-            user.roleName = 'Administrateur'
-            break;
-          case 'DEVELOPER':
-            user.roleName = 'Développeur'
-            break;
-          case 'MOD':
-            user.roleName = 'Modérateur'
-            break;
-          default:
-            user.roleName = 'Utilisateur'
-            break;
-        }
-      }
-      else {
-        user.roleName = user.customRoleName
-      }
+      user.roleName = this.getRoleName(user);
       delete user.email;
-			return user;
-		}
+      return user;
+    }
 
   },
 
   getRoleName: function (user) {
-    if (!user.customRoleName) {
-      switch (user.role) {
-        case 'FOUNDER':
-          return 'Fondateur'
-          break;
-        case 'ADMIN':
-          return 'Administrateur'
-          break;
-        case 'DEVELOPER':
-          return 'Développeur'
-          break;
-        case 'MOD':
-          return 'Modérateur'
-          break;
-        default:
-          return 'Utilisateur'
-          break;
-      }
-    }
-    else {
-      return user.customRoleName
+    if (user.customRoleName) return user.customRoleName;
+
+    switch (user.role) {
+      case 'FOUNDER':
+        return 'Fondateur'
+      case 'ADMIN':
+        return 'Administrateur'
+      case 'DEVELOPER':
+        return 'Développeur'
+      case 'MOD':
+        return 'Modérateur'
+      default:
+        return 'Utilisateur'
     }
   },
 
-  addMd5Email: function(user) {
+  addMd5Email: function (user) {
     user.md5Email = crypto.createHash('md5').update(user.email).digest('hex')
     return user
   },
 
-  hashPassword: function(password) {
+  hashPassword: function (password) {
     return crypto.createHash('sha1').update(salt + password).digest('hex')
   },
 
   /**
    *  Before creating an account, hash his password using salt
    */
-  beforeCreate: function(user, callback) {
+  beforeCreate: function (user, callback) {
     user.password = this.hashPassword(user.password);
     callback();
   },
@@ -210,7 +180,7 @@ module.exports = {
   /**
    *  Before updating an user, hash his password using salt
    */
-  beforeUpdate: function(user, callback) {
+  beforeUpdate: function (user, callback) {
     user.password = this.hashPassword(user.password);
     callback();
   }
