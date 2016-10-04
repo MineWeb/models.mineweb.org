@@ -43,7 +43,8 @@ module.exports = {
     },
 
     releaseDate: {
-			type: 'datetime'
+			type: 'datetime',
+      defaultsTo: null
 		},
 
     changelog: {
