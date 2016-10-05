@@ -26,8 +26,7 @@ module.exports = {
     type: {
 			type: 'string',
 			required: true,
-			in: ['PLUGIN', 'THEME', 'LICENSE', 'HOSTING'],
-      size: 7
+			in: ['PLUGIN', 'THEME', 'LICENSE', 'HOSTING']
 		},
 
     itemId: {
