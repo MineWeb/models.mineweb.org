@@ -94,11 +94,6 @@ module.exports = {
       via: 'user'
     },
 
-    hostings: {
-      collection: 'Hosting',
-      via: 'user'
-    },
-
     licenses: {
       collection: 'License',
       via: 'user'

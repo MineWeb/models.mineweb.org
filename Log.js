@@ -7,6 +7,8 @@
 
 module.exports = {
 
+  connection: process.env.NODE_ENV === 'production' ? 'elasticsearch' : 'mysql', 
+
   attributes: {
 
 		id : {
