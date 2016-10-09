@@ -26,11 +26,6 @@ module.exports = {
       defaultsTo: null
     },
 
-    hosting: {
-      model: 'Hosting',
-      defaultsTo: null
-    },
-
     title: {
       type: 'string',
       required: true,
