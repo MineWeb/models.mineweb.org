@@ -49,12 +49,6 @@ module.exports = {
       type: 'string'
     },
 
-    type: {
-      type: 'string',
-      required: true,
-      in: ['LICENSE', 'HOSTING']
-    },
-
     data: {
       type: 'json'
     }
