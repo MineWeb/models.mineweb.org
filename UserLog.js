@@ -1,13 +1,11 @@
 /**
- * Log.js
+ * UserLog.js
  *
  * @description :: TODO: You might write a short summary of how this model works and what it represents here.
  * @docs        :: http://sailsjs.org/documentation/concepts/models-and-orm/models
  */
 
 module.exports = {
-
-  connection: process.env.NODE_ENV === 'production' ? 'elasticsearch' : 'main_sql',
 
   attributes: {
 
@@ -21,17 +19,7 @@ module.exports = {
     action: {
       type: 'string',
       required: true,
-      in: ['GET_PLUGIN', 'UPDATE', 'KEY_VERIFY', 'ADD_TICKET', 'GET_SECRET_KEY', 'GET_PLUGIN', 'GET_THEME', 'DEBUG']
-    },
-
-    license: {
-      model: 'License'
-    },
-
-    api_version: {
-      type: 'integer',
-      required: true,
-      in: ['v1', 'v2']
+      in: ['TRY_LOGIN', 'LOGIN']
     },
 
     ip: {
@@ -49,14 +37,9 @@ module.exports = {
       type: 'string'
     },
 
-    type: {
-      type: 'string',
-      required: true,
-      in: ['LICENSE', 'HOSTING']
-    },
-
-    data: {
-      type: 'json'
+    user: {
+      model: 'User'
     }
+
   }
 }
