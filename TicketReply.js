@@ -12,16 +12,16 @@ module.exports = {
   attributes: {
 
     id: {
-			type: 'integer',
-			unique: true,
-    	autoIncrement: true,
-    	primaryKey: true,
-		},
+      type: 'integer',
+      unique: true,
+      autoIncrement: true,
+      primaryKey: true
+    },
 
     user: {
-			model: 'User',
-			required: true
-		},
+      model: 'User',
+      required: true
+    },
 
     ticket: {
       model: 'Ticket',
@@ -37,13 +37,14 @@ module.exports = {
   },
 
   // Lifecycle Callbacks
-  beforeCreate: function(values, next) {
+  beforeCreate: function (values, next) {
     values.content = autolinks(values.content.replace("\n", '<br>')) // autolinks + br
-    next();
+    next()
   },
 
   addSignature: function (content, user, lang) {
     var newContent = ''
+    lang = lang.toLowerCase()
 
     // hello
     var d = new Date()
@@ -55,9 +56,9 @@ module.exports = {
       user.rolename = ''
     signature = signature.replace('{USERNAME}', user.username).replace('{ROLENAME}', user.rolename)
 
-    newContent += "<br>" + signature
+    newContent += '<br>' + signature
 
     return newContent
   }
 
-};
+}
