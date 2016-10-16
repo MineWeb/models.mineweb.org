@@ -29,7 +29,7 @@ module.exports = {
 
     itemType: {
       type: 'string',
-      in: ['LICENSE', 'HOSTING', 'PLUGIN', 'THEME'],
+      in: ['LICENSE', 'HOSTING', 'RENEW_LICENSE_HOSTED', 'PLUGIN', 'THEME'],
       size: 7
     },
 

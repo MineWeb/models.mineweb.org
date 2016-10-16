@@ -31,7 +31,7 @@ module.exports = {
     api_version: {
       type: 'integer',
       required: true,
-      in: ['v1', 'v2']
+      in: [1, 2]
     },
 
     ip: {

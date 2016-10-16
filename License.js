@@ -5,7 +5,7 @@
  * @docs        :: http://sailsjs.org/documentation/concepts/models-and-orm/models
  */
 
-var uuid = require('node-uuid');
+var uuid = require('node-uuid')
 
 module.exports = {
 
@@ -13,56 +13,56 @@ module.exports = {
 
   attributes: {
 
-		id : {
-			type: 'integer',
-			unique: true,
-    	autoIncrement: true,
-    	primaryKey: true,
-		},
+    id : {
+      type: 'integer',
+      unique: true,
+      autoIncrement: true,
+      primaryKey: true
+    },
 
-		user: {
-			model: 'User',
-			required: true
-		},
+    user: {
+      model: 'User',
+      required: true
+    },
 
-		key: {
-			type: 'string',
-			unique: true,
+    key: {
+      type: 'string',
+      unique: true,
       defaultsTo: function () {
-				return uuid.v4().substr(4, 24)
-			},
+        return uuid.v4().substr(4, 24)
+      },
       size: 24
-		},
+    },
 
-		state: {
-			type: 'boolean',
-			defaultsTo: true
-		},
+    state: {
+      type: 'boolean',
+      defaultsTo: true
+    },
 
-		host: {
-			type: 'string'
-		},
+    host: {
+      type: 'string'
+    },
 
-		secretKey: {
-			type: 'string',
-			alphanumeric: true
-		},
+    secretKey: {
+      type: 'string',
+      alphanumeric: true
+    },
 
     expireAt: {
-			type: 'datetime',
+      type: 'datetime',
       defaultsTo: function () {
         var d = new Date()
         d.setMonth(d.getMonth() + 1)
         return d
       }
-		},
+    },
 
-		suspended: {
-			type: 'text'
-		},
+    suspended: {
+      type: 'text'
+    },
 
     hosting: {
-      model: 'Hosting',
+      model: 'Hosting'
     },
 
     purchase: {
@@ -71,11 +71,12 @@ module.exports = {
 
   },
 
-  generate: function(userId, host, next) {
+  generate: function (userId, host, next) {
     // Save license
     License.create({
       user: userId,
-      host: host
+      host: host,
+      expireAt: null
     }).exec(function (err, license) {
       if (err && sails)
         sails.log.error(err)
@@ -84,4 +85,4 @@ module.exports = {
     })
   }
 
-};
+}
