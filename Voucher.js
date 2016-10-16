@@ -10,11 +10,11 @@ module.exports = {
   attributes: {
 
     id: {
-			type: 'integer',
-			unique: true,
-    	autoIncrement: true,
-    	primaryKey: true,
-		},
+      type: 'integer',
+      unique: true,
+      autoIncrement: true,
+      primaryKey: true
+    },
 
     code: {
       type: 'string',
@@ -29,8 +29,7 @@ module.exports = {
 
     itemType: {
       type: 'string',
-      in: ['LICENSE', 'HOSTING', 'RENEW_LICENSE_HOSTED', 'PLUGIN', 'THEME'],
-      size: 7
+      in: ['LICENSE', 'HOSTING', 'RENEW_LICENSE_HOSTED', 'PLUGIN', 'THEME']
     },
 
     itemId: {
@@ -42,13 +41,13 @@ module.exports = {
     },
 
     usedAt: {
-			type: 'datetime'
-		},
+      type: 'datetime'
+    },
 
-		usedLocation: {
-			type: 'string',
-			ip: true
-		}
+    usedLocation: {
+      type: 'string',
+      ip: true
+    }
 
   }
-};
+}

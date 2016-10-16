@@ -13,7 +13,7 @@ module.exports = {
 
   attributes: {
 
-    id : {
+    id: {
       type: 'integer',
       unique: true,
       autoIncrement: true,
