@@ -26,7 +26,7 @@ module.exports = {
     type: {
 			type: 'string',
 			required: true,
-			in: ['PLUGIN', 'THEME', 'LICENSE', 'HOSTING']
+			in: ['PLUGIN', 'THEME', 'LICENSE', 'HOSTING', 'RENEW_LICENSE_HOSTED']
 		},
 
     itemId: {
@@ -59,6 +59,7 @@ module.exports = {
       result.theme = []
       result.license = []
       result.hosting = []
+      result.renew_license_hosted = []
 
       // no purchases
       if (purchases === undefined)
@@ -99,6 +100,9 @@ module.exports = {
                 var model = License
                 break;
               case 'HOSTING':
+                var model = Hosting
+                break;
+              case 'RENEW_LICENSE_HOSTED':
                 var model = Hosting
                 break;
               case 'PLUGIN':
