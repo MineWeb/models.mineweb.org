@@ -6,6 +6,8 @@
  */
 
 module.exports = {
+  
+  connection: process.env.NODE_ENV === 'production' ? 'mongodb' : 'main_sql',
 
   attributes: {
 
