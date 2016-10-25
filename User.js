@@ -172,16 +172,17 @@ module.exports = {
    *  Before creating an account, hash his password using salt
    */
   beforeCreate: function (user, callback) {
-    user.password = this.hashPassword(user.password);
-    callback();
+    user.password = this.hashPassword(user.password)
+    callback()
   },
 
   /**
    *  Before updating an user, hash his password using salt
    */
   beforeUpdate: function (user, callback) {
-    user.password = this.hashPassword(user.password);
-    callback();
+    if (user.password !== undefined)
+      user.password = this.hashPassword(user.password)
+    callback()
   }
 
-};
+}
