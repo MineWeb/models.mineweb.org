@@ -69,7 +69,7 @@ module.exports = {
         License.update({id: license.id}, {hosting: hosting.id}).exec(function (err, licenseUpdated) {
           if (err && sails)
             return sails.log.error(err)
-          HostingService.create(hosting, host, function (err) {
+          HostingService.create(hosting, license.id, host, function (err) {
             return next(err, hosting.id)
           })
         })
