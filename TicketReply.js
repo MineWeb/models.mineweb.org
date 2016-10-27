@@ -33,6 +33,11 @@ module.exports = {
     }
 
   },
+  
+  beforeCreate: function (values, next) {		
+    values.content = values.content.replace(/(?:\r\n|\r|\n)/g, '<br />')
+    next()		
+  },
 
   addSignature: function (content, user, lang) {
     var newContent = ''
