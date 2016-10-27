@@ -5,8 +5,6 @@
  * @docs        :: http://sailsjs.org/documentation/concepts/models-and-orm/models
  */
 
-var autolinks = require('autolinks')
-
 module.exports = {
 
   attributes: {
@@ -34,12 +32,6 @@ module.exports = {
       required: true
     }
 
-  },
-
-  // Lifecycle Callbacks
-  beforeCreate: function (values, next) {
-    values.content = autolinks(values.content.replace("\n", '<br>')) // autolinks + br
-    next()
   },
 
   addSignature: function (content, user, lang) {
