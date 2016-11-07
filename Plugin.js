@@ -78,7 +78,7 @@ module.exports = {
 
 		downloads: {
 			type: 'integer',
-			defaultTo: 0
+			defaultsTo: 0
 		},
 
 		price: {
