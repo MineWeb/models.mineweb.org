@@ -164,6 +164,12 @@ module.exports = {
     return user
   },
 
+  getMd5Email: function (user) {
+    if (user.md5Email)
+      return user.md5Email
+    return User.addMd5Email(user).md5Email
+  },
+
   hashPassword: function (password) {
     return crypto.createHash('sha1').update(salt + password).digest('hex')
   },

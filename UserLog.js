@@ -6,7 +6,7 @@
  */
 
 module.exports = {
-  
+
   connection: process.env.NODE_ENV === 'production' ? 'mongodb' : 'main_sql',
 
   attributes: {
@@ -41,6 +41,21 @@ module.exports = {
 
     user: {
       model: 'User'
+    },
+
+    location: {
+      type: 'string',
+      defaultsTo: null
+    },
+
+    agent: {
+      type: 'string',
+      defaultsTo: null
+    },
+
+    deviceName: {
+      type: 'string',
+      defaultsTo: null
     }
 
   }
