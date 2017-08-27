@@ -44,6 +44,22 @@ module.exports = {
       required: true
     },
 
+    plugins: {
+      type: 'json'
+    },
+
+    themes: {
+      type: 'json'
+    },
+
+    current_theme: {
+      type: 'string'
+    },
+
+    users_count: {
+      type: 'integer'
+    },
+
     error: {
       type: 'string'
     },

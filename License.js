@@ -25,6 +25,14 @@ module.exports = {
       required: true
     },
 
+    type: {
+      type: 'string',
+      defaultsTo: 'BASIC',
+      alphanumeric: true,
+      size: 10,
+      in: ['BASIC', 'USER_DEV', 'DEV']
+    },
+
     key: {
       type: 'string',
       unique: true,
