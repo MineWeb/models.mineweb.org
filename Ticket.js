@@ -37,7 +37,7 @@ module.exports = {
     category: {
       type: 'string',
       required: true,
-      in: ['GENERAL', 'SERVER', 'DEVELOPMENT', 'SUGGESTION', 'QUESTION', 'OTHER']
+      in: ['GENERAL', 'SERVER', 'INSTALL', 'DEVELOPMENT', 'SUGGESTION', 'QUESTION', 'OTHER']
     },
 
     state: {
