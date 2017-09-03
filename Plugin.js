@@ -19,7 +19,7 @@ module.exports = {
     name: {
       type: 'string',
       required: true,
-      min: 5,
+      min: 2,
       max: 20,
       size: 20
     },
@@ -28,7 +28,7 @@ module.exports = {
       type: 'string',
       unique: true,
       required: false,
-      min: 3,
+      min: 2,
       max: 20,
       size: 20
     },
