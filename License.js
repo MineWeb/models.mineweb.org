@@ -9,7 +9,7 @@ var uuid = require('node-uuid')
 
 module.exports = {
 
-  price: 9.99,
+  price: 0,
 
   attributes: {
 
